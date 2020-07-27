@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+class Account
+{
+  String Account_number;
+  String Name;
+  float Amount;
+  int rem;
+  final int minbal=500;
+  Scanner input= new Scanner(System.in);
+  void withdraw()
+  {
+    System.out.println("\nEnter how much money you want to withdraw: ");
+    rem = input.nextInt();
+    Amount= Amount - rem;
+    
+  }
+  
+  void view_balance()
+  {
+    System.out.println("Your SB Account detals: ");
+    System.out.println("Account number : " + Account_number +"\nName: " + Name + "\nTotal Amount: " + Amount);
+    if(minbal > Amount)
+    {
+      System.out.println("Your balance is less then 500. Please deposit some Amount.");
+    }
+    
+  }
+}
+
+class SBAccount extends Account
+{
+  Scanner input= new Scanner(System.in);
+  void deposit()
+  {
+    System.out.println("Enter Your Account number:");
+    Account_number= input.nextLine();
+    System.out.println("Enter Your Name:");
+    Name = input.nextLine();
+    System.out.println("Enter how much balance your want to deposit : ");
+    Amount= input.nextFloat();
+    Amount= Amount+  (Amount * 4/100);  // 4 %  Interest
+  }
+}
+
+class CurrentAccount extends Account
+{
+  Scanner input= new Scanner(System.in);
+  void deposit()
+  {
+    System.out.println("Enter Your Account number:");
+    Account_number= input.nextLine();
+    System.out.println("Enter Your Name:");
+    Name = input.nextLine();
+    System.out.println("Enter how much balance your want to deposit:");
+    Amount= input.nextFloat();
+  }
+}
+
+public class Module_4_case_study1PART2{
+
+  public static void main(String[] args) {
+  Scanner input= new Scanner(System.in);
+    SBAccount sb= new SBAccount();
+    CurrentAccount ca=new CurrentAccount();
+    
+    System.out.println("1. For SBAccount:");
+    System.out.println("2. For Current Account:");
+    
+    int choice = input.nextInt();
+    switch(choice) 
+    {
+     case 1:
+       System.out.println(" Deposit your Amount : ");
+       sb.deposit();
+       sb.view_balance();
+       sb.withdraw();
+       sb.view_balance();
+       break;  
+     case 2:
+       System.out.println(" Deposit your Amount : ");
+       ca.deposit();
+       ca.view_balance();
+       ca.withdraw();
+       ca.view_balance();
+       break;
+     default:
+       System.out.println("choice is wrong. ");
+       break;
+    }
+
+  }
+
+}
